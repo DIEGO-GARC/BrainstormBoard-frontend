@@ -78,6 +78,7 @@ header p {
 
 /* Tarjetas (notas) */
 .idea-card {
+  position: relative;
   background-color: #fffec9;
   color: #2c3e50;
   padding: 15px;
@@ -90,6 +91,32 @@ header p {
   user-select: none;
   transition: transform 0.15s ease-in-out;
 }
+
+.delete-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s ease;
+}
+
+.delete-btn:hover {
+  background-color: #e60000;
+}
+
 
 .idea-card:hover {
   transform: scale(1.02);

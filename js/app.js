@@ -1,9 +1,22 @@
+
 let draggedCard = null;
 
-//DOM Elements
-const inputIdea = document.getElementById('idea-input');
-const addIdeaBtn = document.getElementById('add-idea-btn');
-const board = document.getElementById('board');
+function saveIdeas() {
+  const cards = document.querySelectorAll('.idea-card');
+   const ideas = Array.from(cards).map(card => {
+    // Excluye el texto del botón (✖)
+    const btn = card.querySelector('.delete-btn');
+    return btn ? card.textContent.replace(btn.textContent, '').trim() : card.textContent.trim();
+  });
+
+  localStorage.setItem('brainstorm-ideas', JSON.stringify(ideas));
+}
+
+function loadIdeas() {
+  const saved = JSON.parse(localStorage.getItem('brainstorm-ideas')) || [];
+  saved.forEach(text => createIdeaCard(text));
+}
+
 
 function createIdeaCard(text){
     if(!text.trim()) return;
@@ -11,6 +24,11 @@ function createIdeaCard(text){
     const card = document.createElement('div');
     card.className = 'idea-card';
     card.textContent = text;
+
+    const btn = document.createElement('button');
+    btn.textContent = '✖';
+    btn.classList.add('delete-btn');
+    card.appendChild(btn);
 
     card.setAttribute('draggable', 'true');
 
@@ -25,6 +43,7 @@ function createIdeaCard(text){
     });
 
     board.appendChild(card);
+    saveIdeas();
 }
 
 function getDragAfterElement(container, y){
@@ -41,6 +60,16 @@ function getDragAfterElement(container, y){
         }
     }, {offset: Number.NEGATIVE_INFINITY}).element;
 }
+
+//DOM Elements
+const inputIdea = document.getElementById('idea-input');
+const addIdeaBtn = document.getElementById('add-idea-btn');
+const board = document.getElementById('board');
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadIdeas();
+});
+
 
 addIdeaBtn.addEventListener('click', () =>{
     createIdeaCard(inputIdea.value);
@@ -61,20 +90,12 @@ board.addEventListener('dragover', (e) => {
 
 });
 
-/* board.addEventListener('drop', (e) => {
-    e.preventDefault();
-
-    if(draggedCard){
-
-        const afterElement = getDragAfterElement(board, e.clientY);
-
-        if(afterElement === null){
-            board.appendChild(draggedCard);
-        }else{
-            board.insertBefore(draggedCard, afterElement);
-        }
-
+document.addEventListener('click', function (e) {
+  if (e.target.classList.contains('delete-btn')) {
+    const card = e.target.closest('.idea-card');
+    if (card) {
+      card.remove();
+      saveIdeas();
     }
-}); */
-
-
+  }
+});
