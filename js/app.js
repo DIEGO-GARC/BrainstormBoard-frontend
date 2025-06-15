@@ -88,6 +88,7 @@ board.addEventListener('dragover', (e) => {
         board.insertBefore(draggedCard, afterElement);
     }
 
+    saveIdeas();
 });
 
 document.addEventListener('click', function (e) {
