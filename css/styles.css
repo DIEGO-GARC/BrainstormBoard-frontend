@@ -1,0 +1,103 @@
+
+
+/* Estilos generales */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Encabezado */
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin: 0;
+  color: #2c3e50;
+}
+
+header p {
+  font-size: 1rem;
+  color: #7f8c8d;
+}
+
+/* Sección de entrada */
+#input-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 600px;
+}
+
+#idea-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+#add-idea-btn {
+  padding: 10px 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+#add-idea-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Tablero de ideas */
+#board {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  max-width: 900px;
+  width: 100%;
+  height: 500px; /* ← altura fija */
+  padding: 15px;
+  border: 2px dashed #bdc3c7;
+  border-radius: 12px;
+  background-color: #ecf0f1;
+  overflow-y: auto; /* scroll vertical si hay muchas tarjetas */
+  align-content: flex-start;
+}
+
+/* Tarjetas (notas) */
+.idea-card {
+  background-color: #fffec9;
+  color: #2c3e50;
+  padding: 15px;
+  width: 160px;
+  min-height: 100px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: grab;
+  word-wrap: break-word;
+  user-select: none;
+  transition: transform 0.15s ease-in-out;
+}
+
+.idea-card:hover {
+  transform: scale(1.02);
+}
+
+/* Estilo cuando se arrastra */
+.idea-card.dragging {
+  opacity: 0.5;
+  transform: rotate(3deg) scale(0.95);
+  cursor: grabbing;
+}
